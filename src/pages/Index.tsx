@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import Icon from '@/components/ui/icon';
-import { HERO_IMG, SERVICES, TALKS, ARTICLES } from '@/components/site/data';
+import { HERO_IMG, SERVICES, TALKS, ARTICLES, TOPICS, STORIES, PROGRAMS } from '@/components/site/data';
 
 const MARQUEE = ['Коучинг', '·', 'Обучение', '·', 'Выступления', '·', 'Развитие людей', '·', 'Лидерство', '·'];
 
@@ -34,16 +34,16 @@ const Index = () => {
               style={{ animationDelay: '0.4s', opacity: 0 }}
             >
               <Link
-                to="/services"
+                to="/topics"
                 className="inline-flex items-center gap-2 bg-primary text-primary-foreground px-7 py-4 rounded-full font-600 hover:opacity-90 transition-opacity"
               >
-                Мои услуги <Icon name="ArrowRight" size={18} />
+                Узнать себя <Icon name="ArrowRight" size={18} />
               </Link>
               <Link
-                to="/talks"
+                to="/about"
                 className="inline-flex items-center gap-2 border border-foreground/20 px-7 py-4 rounded-full font-600 hover:bg-secondary transition-colors"
               >
-                Выступления
+                О Кире
               </Link>
             </div>
           </div>
@@ -75,7 +75,7 @@ const Index = () => {
       <section className="py-24 container">
         <div className="grid md:grid-cols-12 gap-12">
           <div className="md:col-span-4">
-            <p className="text-sm font-600 uppercase tracking-[0.2em] text-primary">Обо мне</p>
+            <p className="text-sm font-600 uppercase tracking-[0.2em] text-primary">О Кире</p>
           </div>
           <div className="md:col-span-8">
             <h2 className="font-display text-4xl md:text-5xl font-500 leading-tight text-balance">
@@ -87,36 +87,116 @@ const Index = () => {
               которые ищут ясность в карьере и жизни.
             </p>
             <Link to="/about" className="inline-flex items-center gap-2 text-primary font-600 mt-6">
-              Подробнее обо мне <Icon name="ArrowRight" size={18} />
+              Подробнее <Icon name="ArrowRight" size={18} />
             </Link>
           </div>
         </div>
       </section>
 
-      {/* SERVICES */}
+      {/* TOPICS */}
+      <section className="py-24 bg-foreground text-background">
+        <div className="container">
+          <div className="flex items-end justify-between mb-14">
+            <div>
+              <p className="text-sm font-600 uppercase tracking-[0.2em] text-primary mb-4">Запросы</p>
+              <h2 className="font-display text-4xl md:text-6xl font-500">С чем приходят ко мне</h2>
+            </div>
+            <Link to="/topics" className="hidden md:inline-flex items-center gap-1 text-sm font-600 text-primary">
+              Все запросы <Icon name="ArrowUpRight" size={16} />
+            </Link>
+          </div>
+          <div className="grid md:grid-cols-3 gap-4">
+            {TOPICS.slice(0, 3).map((t) => (
+              <Link
+                to="/topics"
+                key={t.title}
+                className="group bg-background/5 border border-background/10 hover:border-primary rounded-2xl p-6 transition-colors"
+              >
+                <div className="h-11 w-11 rounded-full bg-primary/20 flex items-center justify-center text-primary mb-5">
+                  <Icon name={t.icon} size={20} />
+                </div>
+                <h3 className="font-display text-xl font-600 group-hover:text-primary transition-colors">{t.title}</h3>
+                <p className="mt-2 text-background/60 text-sm leading-relaxed line-clamp-2">{t.desc}</p>
+              </Link>
+            ))}
+          </div>
+          <Link
+            to="/topics"
+            className="mt-8 inline-flex items-center gap-2 text-primary font-600 md:hidden"
+          >
+            Все запросы <Icon name="ArrowRight" size={18} />
+          </Link>
+        </div>
+      </section>
+
+      {/* PROGRAMS */}
+      <section className="py-24 container">
+        <div className="flex items-end justify-between mb-14">
+          <div>
+            <p className="text-sm font-600 uppercase tracking-[0.2em] text-primary mb-4">Программы</p>
+            <h2 className="font-display text-4xl md:text-6xl font-500">Форматы работы</h2>
+          </div>
+          <Link to="/programs" className="hidden md:inline-flex items-center gap-1 text-sm font-600 text-primary">
+            Все программы <Icon name="ArrowUpRight" size={16} />
+          </Link>
+        </div>
+        <div className="grid md:grid-cols-3 gap-6">
+          {PROGRAMS.map((p) => (
+            <Link
+              to="/programs"
+              key={p.title}
+              className={`group rounded-3xl p-8 border transition-all hover:-translate-y-1 flex flex-col ${
+                p.accent ? 'bg-foreground text-background border-foreground' : 'bg-card border-border hover:border-primary'
+              }`}
+            >
+              <span className={`self-start text-xs font-600 uppercase tracking-wider px-3 py-1 rounded-full ${
+                p.accent ? 'bg-primary text-primary-foreground' : 'bg-primary/10 text-primary'
+              }`}>
+                {p.badge}
+              </span>
+              <h3 className="font-display text-2xl font-600 mt-5">{p.title}</h3>
+              <p className={`mt-2 text-sm ${p.accent ? 'text-background/70' : 'text-muted-foreground'}`}>{p.duration} · {p.sessions}</p>
+              <p className={`mt-4 text-sm leading-relaxed ${p.accent ? 'text-background/80' : 'text-muted-foreground'}`}>{p.desc}</p>
+              <span className="mt-auto pt-6 inline-flex items-center gap-1 text-primary text-sm font-600 group-hover:gap-2 transition-all">
+                Подробнее <Icon name="ArrowRight" size={16} />
+              </span>
+            </Link>
+          ))}
+        </div>
+      </section>
+
+      {/* STORIES TEASER */}
       <section className="py-24 bg-secondary/40">
         <div className="container">
           <div className="flex items-end justify-between mb-14">
-            <h2 className="font-display text-4xl md:text-6xl font-500">Услуги</h2>
-            <Link to="/services" className="hidden md:inline-flex items-center gap-1 text-sm font-600 text-primary">
-              Все услуги <Icon name="ArrowUpRight" size={16} />
+            <div>
+              <p className="text-sm font-600 uppercase tracking-[0.2em] text-primary mb-4">Истории клиентов</p>
+              <h2 className="font-display text-4xl md:text-6xl font-500">Реальные изменения</h2>
+            </div>
+            <Link to="/stories" className="hidden md:inline-flex items-center gap-1 text-sm font-600 text-primary">
+              Все истории <Icon name="ArrowUpRight" size={16} />
             </Link>
           </div>
           <div className="grid md:grid-cols-3 gap-6">
-            {SERVICES.map((s) => (
+            {STORIES.map((s) => (
               <Link
-                to="/services"
-                key={s.num}
-                className="group bg-card rounded-3xl p-8 border border-border hover:border-primary transition-colors"
+                key={s.name}
+                to="/stories"
+                className="group bg-card rounded-3xl p-8 border border-border hover:border-primary transition-colors flex flex-col"
               >
-                <div className="flex items-center justify-between">
-                  <span className="font-display text-5xl text-primary/30 font-600">{s.num}</span>
-                  <div className="h-12 w-12 rounded-full bg-primary/10 flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-primary-foreground transition-colors">
-                    <Icon name={s.icon} size={22} />
+                <Icon name="Quote" size={32} className="text-primary/20 mb-5" />
+                <p className="font-display text-xl italic leading-snug text-foreground group-hover:text-primary transition-colors line-clamp-4">
+                  {s.quote}
+                </p>
+                <div className="mt-auto pt-6 flex items-center gap-3">
+                  <div className="h-10 w-10 rounded-full bg-primary/10 flex items-center justify-center font-display font-700 text-primary">
+                    {s.name[0]}
+                  </div>
+                  <div>
+                    <p className="font-600 text-sm">{s.name}</p>
+                    <p className="text-xs text-muted-foreground">{s.role}</p>
                   </div>
                 </div>
-                <h3 className="font-display text-3xl font-600 mt-6">{s.title}</h3>
-                <p className="mt-3 text-muted-foreground">{s.desc}</p>
               </Link>
             ))}
           </div>
